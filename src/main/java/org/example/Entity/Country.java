@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.Enums.Continent;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(schema = "world", name="country")
@@ -17,16 +19,16 @@ import java.math.BigDecimal;
 public class Country {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "code", columnDefinition = "varchar(3)")
+    @Column(name = "code")
     private String code;
-    @Column(name = "code_2", columnDefinition = "varchar(2)")
+    @Column(name = "code_2")
     private String code2;
     @Column(name = "name")
     private String name;
     @Column(name = "continent")
-    private Integer continent;
+    @Enumerated(EnumType.ORDINAL)
+    private Continent continent;
     @Column(name = "region")
     private String region;
     @Column(name = "surface_area", precision = 10, scale = 2)
@@ -49,4 +51,10 @@ public class Country {
     private String headOfState;
     @Column(name = "capital")
     private Integer capital;
+    @OneToOne
+    @JoinColumn(name = "capital")
+    private City city;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_id")
+    private Set<CountryLanguage> languages;
 }
