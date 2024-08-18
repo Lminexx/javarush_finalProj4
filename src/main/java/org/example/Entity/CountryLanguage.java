@@ -1,12 +1,15 @@
 package org.example.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.lang.annotation.Native;
 import java.math.BigDecimal;
 
 @Entity
 @Table(schema = "world", name = "country_language")
+@Getter
+@Setter
 public class CountryLanguage {
     @Id
     @Column(name = "id")
@@ -18,7 +21,7 @@ public class CountryLanguage {
     @Column(name = "language")
     private String language;
     @Column(name = "is_official")
-    private Byte isOfficial;
+    private Boolean isOfficial;
     @Column(name = "percentage", precision = 4, scale = 1)
     private BigDecimal percentage;
 

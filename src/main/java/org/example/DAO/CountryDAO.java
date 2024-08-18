@@ -2,9 +2,20 @@ package org.example.DAO;
 
 import org.example.Entity.Country;
 import org.hibernate.SessionFactory;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
-public class CountryDAO extends DaoGeneric<Country> {
+import java.util.List;
+
+public class CountryDAO {
+    private final SessionFactory sessionFactory;
+
     public CountryDAO(SessionFactory sessionFactory) {
-        super(Country.class, sessionFactory);
+        this.sessionFactory = sessionFactory;
+    }
+
+    public List<Country> getAll() {
+        Query<Country> query = sessionFactory.getCurrentSession().createQuery("select c from Country c", Country.class);
+        return query.list();
     }
 }

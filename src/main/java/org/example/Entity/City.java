@@ -1,9 +1,13 @@
 package org.example.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(schema = "world", name = "city")
+@Setter
+@Getter
 public class City {
     @Id
     @Column(name = "id")
@@ -18,5 +22,6 @@ public class City {
     private String district;
     @Column(name = "population")
     private Integer population;
+
 
 }
